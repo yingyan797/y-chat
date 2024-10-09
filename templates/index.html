@@ -1,0 +1,32 @@
+<head>
+    <title>Y-Chat Home</title>
+    <style>
+        .column {
+            float: left;
+            width: 35%;
+            padding: 10px;
+        }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="background-color: skyblue;"><a href="/">Y-Chat Home</a>: Context-based question answering</h2> <form action="/" method="post">
+    <table><tr><th style="background-color: lightgoldenrodyellow;">Ask question below:</th>
+        <th style="background-color: lightcyan;">Enter the reference context to find answer from:</th></tr>
+        <tr><td><textarea name="question" rows="3" cols="50">{% if question %}{{question}}{% endif %}</textarea></td>
+            <td><textarea name="context" rows="5" cols="50">{% if context %}{{context}}{% endif %}</textarea></td>
+        <td><input type="submit" name="ask" value="Get answer"></td> </tr></table> </form> <div class="rows">
+        <div class="column" style="background-color: lightcyan;"><h3>Evidence from context</h3> {% if context %}
+            {% for seg in segs %}  {% if seg[2] %}<span style="color: blue; font-size: large;">{{context[seg[0]:seg[1]]}}</span>
+            {% else %}{{context[seg[0]:seg[1]]}}{% endif %} {% endfor %} {% endif %} </div>
+        <div class="column"><h3>Context summary</h3><textarea readonly rows="7" cols="50">{{evidence}}</textarea> 
+            <h3>Answer</h3> <textarea readonly rows="5" cols="50">{{answer}}</textarea>
+        </div>
+    </div>
+
+
+</body>
